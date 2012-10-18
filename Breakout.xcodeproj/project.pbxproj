@@ -29,17 +29,17 @@
 		987D79C2162775C500FD44A3 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
 		987D79C4162775C500FD44A3 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
 		987D79C6162775C500FD44A3 /* OpenGLES.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = OpenGLES.framework; path = System/Library/Frameworks/OpenGLES.framework; sourceTree = SDKROOT; };
-		987D79CA162775C500FD44A3 /* Breakout-Info.plist */ = {isa = PBXFileReference; path = "Breakout-Info.plist"; sourceTree = "<group>"; };
+		987D79CA162775C500FD44A3 /* Breakout-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Breakout-Info.plist"; sourceTree = "<group>"; };
 		987D79CC162775C500FD44A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		987D79CE162775C500FD44A3 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		987D79D0162775C500FD44A3 /* Breakout-Prefix.pch */ = {isa = PBXFileReference; path = "Breakout-Prefix.pch"; sourceTree = "<group>"; };
-		987D79D1162775C500FD44A3 /* BreakoutAppDelegate.h */ = {isa = PBXFileReference; path = BreakoutAppDelegate.h; sourceTree = "<group>"; };
+		987D79D0162775C500FD44A3 /* Breakout-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Breakout-Prefix.pch"; sourceTree = "<group>"; };
+		987D79D1162775C500FD44A3 /* BreakoutAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BreakoutAppDelegate.h; sourceTree = "<group>"; };
 		987D79D2162775C500FD44A3 /* BreakoutAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakoutAppDelegate.m; sourceTree = "<group>"; };
 		987D79D5162775C500FD44A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPhone.storyboard; sourceTree = "<group>"; };
 		987D79D8162775C500FD44A3 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = en; path = en.lproj/MainStoryboard_iPad.storyboard; sourceTree = "<group>"; };
 		987D79DA162775C500FD44A3 /* Shader.fsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.fsh; path = Shaders/Shader.fsh; sourceTree = "<group>"; };
 		987D79DC162775C500FD44A3 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
-		987D79DE162775C500FD44A3 /* BreakoutViewController.h */ = {isa = PBXFileReference; path = BreakoutViewController.h; sourceTree = "<group>"; };
+		987D79DE162775C500FD44A3 /* BreakoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BreakoutViewController.h; sourceTree = "<group>"; };
 		987D79DF162775C500FD44A3 /* BreakoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakoutViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
