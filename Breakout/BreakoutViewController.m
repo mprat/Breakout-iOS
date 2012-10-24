@@ -27,12 +27,15 @@ enum
     NUM_ATTRIBUTES
 };
 
-GLfloat gSquareVertexData[12] = 
+GLfloat gSquareVertexData[36] = 
 {
-    -0.5f, -0.5f, 0.0f,
-    0.5f, -0.5f, 0.0f, 
-    -0.5f, 0.5f, 0.0f,
-    0.5f, 0.5f, 0.0f
+    //x,y,z,normalX,normalY,normalZ
+    0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+    -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
+    0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f
 };
 //
 //GLfloat gCubeVertexData[216] = 
