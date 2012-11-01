@@ -27,15 +27,15 @@ enum
     NUM_ATTRIBUTES
 };
 
-GLfloat gSquareVertexData[36] = 
+GLfloat gSquareVertexData[18] = 
 {
     //x,y,z,normalX,normalY,normalZ
-    0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, 0.0f, 0.0f, 1.0f,
-    0.5f, -0.5f, 0.0f, 0.0f, 0.0f, 1.0f
+    0.5f, 0.5f, 0.0f, //0.0f, //0.0f, 1.0f,
+    0.5f, -0.5f, 0.0f,// 0.0f, //0.0f, 1.0f,
+    -0.5f, 0.5f, 0.0f, //0.0f, //0.0f, 1.0f,
+    -0.5f, -0.5f, 0.0f,// 0.0f, //0.0f, 1.0f,
+    -0.5f, 0.5f, 0.0f, //0.0f, //0.0f, 1.0f,
+    0.5f, -0.5f, 0.0f, //0.0f, //0.0f, 1.0f
 };
 //
 //GLfloat gCubeVertexData[216] = 
@@ -171,9 +171,9 @@ GLfloat gSquareVertexData[36] =
     glBufferData(GL_ARRAY_BUFFER, sizeof(gSquareVertexData), gSquareVertexData, GL_STATIC_DRAW);
     
     glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(0));
-    glEnableVertexAttribArray(GLKVertexAttribNormal);
-    glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
+    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 16, BUFFER_OFFSET(0));
+    //glEnableVertexAttribArray(GLKVertexAttribNormal);
+    //glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
     
     glBindVertexArrayOES(0);
     
@@ -260,7 +260,7 @@ GLfloat gSquareVertexData[36] =
     // Bind attribute locations.
     // This needs to be done prior to linking.
     glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
-    glBindAttribLocation(_program, ATTRIB_NORMAL, "normal");
+    //glBindAttribLocation(_program, ATTRIB_NORMAL, "normal");
     
     // Link program.
     if (![self linkProgram:_program]) {

@@ -7,7 +7,7 @@
 //
 
 attribute vec4 position;
-attribute vec3 normal;
+//attribute vec3 normal;
 
 varying lowp vec4 colorVarying;
 
@@ -16,6 +16,7 @@ uniform mat3 normalMatrix;
 
 void main()
 {
+    vec3 normal = vec3(1.0, 1.0, 1.0);
     vec3 eyeNormal = normalize(normalMatrix * normal);
     vec3 lightPosition = vec3(0.0, 0.0, 1.0);
     vec4 diffuseColor = vec4(0.4, 0.4, 1.0, 1.0);
