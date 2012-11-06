@@ -234,7 +234,9 @@ GLfloat gSquareVertexData[18] =
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
-        
+    
+    
+    
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation

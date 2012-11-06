@@ -20,6 +20,10 @@
 		987D79DB162775C500FD44A3 /* Shader.fsh in Resources */ = {isa = PBXBuildFile; fileRef = 987D79DA162775C500FD44A3 /* Shader.fsh */; };
 		987D79DD162775C500FD44A3 /* Shader.vsh in Resources */ = {isa = PBXBuildFile; fileRef = 987D79DC162775C500FD44A3 /* Shader.vsh */; };
 		987D79E0162775C500FD44A3 /* BreakoutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 987D79DF162775C500FD44A3 /* BreakoutViewController.m */; };
+		98FFBF4D1649C81600847368 /* IBRTexture.mm in Sources */ = {isa = PBXBuildFile; fileRef = 98FFBF4A1649C81600847368 /* IBRTexture.mm */; };
+		98FFBF4E1649C81600847368 /* TEXTURE.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 98FFBF4B1649C81600847368 /* TEXTURE.cpp */; };
+		98FFBF531649C95F00847368 /* VideoShader.fsh in Sources */ = {isa = PBXBuildFile; fileRef = 98FFBF511649C95F00847368 /* VideoShader.fsh */; };
+		98FFBF541649C95F00847368 /* VideoShader.vsh in Sources */ = {isa = PBXBuildFile; fileRef = 98FFBF521649C95F00847368 /* VideoShader.vsh */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -41,6 +45,13 @@
 		987D79DC162775C500FD44A3 /* Shader.vsh */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.glsl; name = Shader.vsh; path = Shaders/Shader.vsh; sourceTree = "<group>"; };
 		987D79DE162775C500FD44A3 /* BreakoutViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BreakoutViewController.h; sourceTree = "<group>"; };
 		987D79DF162775C500FD44A3 /* BreakoutViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BreakoutViewController.m; sourceTree = "<group>"; };
+		98FFBF491649C81600847368 /* IBRTexture.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IBRTexture.h; sourceTree = "<group>"; };
+		98FFBF4A1649C81600847368 /* IBRTexture.mm */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.objcpp; path = IBRTexture.mm; sourceTree = "<group>"; };
+		98FFBF4B1649C81600847368 /* TEXTURE.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = TEXTURE.cpp; sourceTree = "<group>"; };
+		98FFBF4C1649C81600847368 /* TEXTURE.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TEXTURE.h; sourceTree = "<group>"; };
+		98FFBF511649C95F00847368 /* VideoShader.fsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VideoShader.fsh; sourceTree = "<group>"; };
+		98FFBF521649C95F00847368 /* VideoShader.vsh */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.glsl; path = VideoShader.vsh; sourceTree = "<group>"; };
+		98FFBF551649C98B00847368 /* glUtil.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = glUtil.h; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -91,6 +102,9 @@
 		987D79C8162775C500FD44A3 /* Breakout */ = {
 			isa = PBXGroup;
 			children = (
+				98FFBF551649C98B00847368 /* glUtil.h */,
+				98FFBF501649C95F00847368 /* AbeVideoShader */,
+				98FFBF481649C81600847368 /* AbeTextures */,
 				987D79D1162775C500FD44A3 /* BreakoutAppDelegate.h */,
 				987D79D2162775C500FD44A3 /* BreakoutAppDelegate.m */,
 				987D79D4162775C500FD44A3 /* MainStoryboard_iPhone.storyboard */,
@@ -114,6 +128,26 @@
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
+		};
+		98FFBF481649C81600847368 /* AbeTextures */ = {
+			isa = PBXGroup;
+			children = (
+				98FFBF491649C81600847368 /* IBRTexture.h */,
+				98FFBF4A1649C81600847368 /* IBRTexture.mm */,
+				98FFBF4B1649C81600847368 /* TEXTURE.cpp */,
+				98FFBF4C1649C81600847368 /* TEXTURE.h */,
+			);
+			path = AbeTextures;
+			sourceTree = SOURCE_ROOT;
+		};
+		98FFBF501649C95F00847368 /* AbeVideoShader */ = {
+			isa = PBXGroup;
+			children = (
+				98FFBF511649C95F00847368 /* VideoShader.fsh */,
+				98FFBF521649C95F00847368 /* VideoShader.vsh */,
+			);
+			path = AbeVideoShader;
+			sourceTree = SOURCE_ROOT;
 		};
 /* End PBXGroup section */
 
@@ -183,6 +217,10 @@
 				987D79CF162775C500FD44A3 /* main.m in Sources */,
 				987D79D3162775C500FD44A3 /* BreakoutAppDelegate.m in Sources */,
 				987D79E0162775C500FD44A3 /* BreakoutViewController.m in Sources */,
+				98FFBF4D1649C81600847368 /* IBRTexture.mm in Sources */,
+				98FFBF4E1649C81600847368 /* TEXTURE.cpp in Sources */,
+				98FFBF531649C95F00847368 /* VideoShader.fsh in Sources */,
+				98FFBF541649C95F00847368 /* VideoShader.vsh in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
