@@ -6,9 +6,11 @@
 //  Copyright (c) 2012 __MyCompanyName__. All rights reserved.
 //
 
-varying lowp vec4 colorVarying;
+varying highp vec4 tcoord;
+uniform sampler2D tex;
 
 void main()
 {
-    gl_FragColor = colorVarying;
+    gl_FragColor = texture2D(tex, tcoord.xy);
+//    gl_FragColor = vec4(0, 0, 1.0, 0);
 }

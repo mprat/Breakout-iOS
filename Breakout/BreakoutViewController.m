@@ -15,6 +15,7 @@ enum
 {
     UNIFORM_MODELVIEWPROJECTION_MATRIX,
     UNIFORM_NORMAL_MATRIX,
+    UNIFORM_TEXTURE,
     NUM_UNIFORMS
 };
 GLint uniforms[NUM_UNIFORMS];
@@ -142,6 +143,22 @@ GLfloat gSquareVertexData[18] =
     
 //    _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
     _modelViewProjectionMatrix = _projectionMatrix;
+    
+    //load textures
+    UIImage* imageClass = [UIImage imageNamed:@"../circle.png"];
+    CGImageRef spriteImage = imageClass.CGImage;
+    size_t storedwidth = CGImageGetWidth(spriteImage);
+    size_t storedheight = CGImageGetHeight(spriteImage);
+    GLubyte *spriteData = (GLubyte *) calloc(storedwidth*storedheight*4, sizeof(GLubyte));
+    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, storedwidth, storedheight, 8, storedwidth*4, CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);  
+    CGContextDrawImage(spriteContext, CGRectMake(0, 0, storedwidth, storedheight), spriteImage);
+    CGContextRelease(spriteContext);    
+    GLuint tid;
+    glGenTextures(1, &(tid));
+    glBindTexture(GL_TEXTURE_2D, tid);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, storedwidth, storedheight, 0, GL_RGB, GL_UNSIGNED_BYTE, spriteData);
+//    free(spriteData);
 }
 
 - (void)tearDownGL
@@ -198,6 +215,10 @@ GLfloat gSquareVertexData[18] =
     //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
     GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+    //add textures
+//    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, 0); 
+    glUniform1i(uniforms[UNIFORM_TEXTURE], 0);  
     glDrawArrays(GL_TRIANGLES, 0, 6);    
     
     // user controlled panel
