@@ -37,53 +37,6 @@ GLfloat gSquareVertexData[18] =
     -0.5f, 0.5f, 0.0f, //0.0f, //0.0f, 1.0f,
     0.5f, -0.5f, 0.0f, //0.0f, //0.0f, 1.0f
 };
-//
-//GLfloat gCubeVertexData[216] = 
-//{
-//    // Data layout for each line below is:
-//    // positionX, positionY, positionZ,     normalX, normalY, normalZ,
-//    0.5f, -0.5f, -0.5f,        1.0f, 0.0f, 0.0f,
-//    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
-//    0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
-//    0.5f, -0.5f, 0.5f,         1.0f, 0.0f, 0.0f,
-//    0.5f, 0.5f, 0.5f,          1.0f, 0.0f, 0.0f,
-//    0.5f, 0.5f, -0.5f,         1.0f, 0.0f, 0.0f,
-//    
-//    0.5f, 0.5f, -0.5f,         0.0f, 1.0f, 0.0f,
-//    -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
-//    0.5f, 0.5f, 0.5f,          0.0f, 1.0f, 0.0f,
-//    0.5f, 0.5f, 0.5f,          0.0f, 1.0f, 0.0f,
-//    -0.5f, 0.5f, -0.5f,        0.0f, 1.0f, 0.0f,
-//    -0.5f, 0.5f, 0.5f,         0.0f, 1.0f, 0.0f,
-//    
-//    -0.5f, 0.5f, -0.5f,        -1.0f, 0.0f, 0.0f,
-//    -0.5f, -0.5f, -0.5f,       -1.0f, 0.0f, 0.0f,
-//    -0.5f, 0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,
-//    -0.5f, 0.5f, 0.5f,         -1.0f, 0.0f, 0.0f,
-//    -0.5f, -0.5f, -0.5f,       -1.0f, 0.0f, 0.0f,
-//    -0.5f, -0.5f, 0.5f,        -1.0f, 0.0f, 0.0f,
-//    
-//    -0.5f, -0.5f, -0.5f,       0.0f, -1.0f, 0.0f,
-//    0.5f, -0.5f, -0.5f,        0.0f, -1.0f, 0.0f,
-//    -0.5f, -0.5f, 0.5f,        0.0f, -1.0f, 0.0f,
-//    -0.5f, -0.5f, 0.5f,        0.0f, -1.0f, 0.0f,
-//    0.5f, -0.5f, -0.5f,        0.0f, -1.0f, 0.0f,
-//    0.5f, -0.5f, 0.5f,         0.0f, -1.0f, 0.0f,
-//    
-//    0.5f, 0.5f, 0.5f,          0.0f, 0.0f, 1.0f,
-//    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-//    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-//    0.5f, -0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-//    -0.5f, 0.5f, 0.5f,         0.0f, 0.0f, 1.0f,
-//    -0.5f, -0.5f, 0.5f,        0.0f, 0.0f, 1.0f,
-//    
-//    0.5f, -0.5f, -0.5f,        0.0f, 0.0f, -1.0f,
-//    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,
-//    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,
-//    0.5f, 0.5f, -0.5f,         0.0f, 0.0f, -1.0f,
-//    -0.5f, -0.5f, -0.5f,       0.0f, 0.0f, -1.0f,
-//    -0.5f, 0.5f, -0.5f,        0.0f, 0.0f, -1.0f
-//};
 
 @interface BreakoutViewController () {
     GLuint _program;
@@ -220,19 +173,23 @@ GLfloat gSquareVertexData[18] =
     
     // Render the object with ES2
     glUseProgram(_program);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, _modelViewProjectionMatrix.m);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
     
     float x = 0.0;
-    for (int i = 1; i < 5; i++)
+    float y = -1.0;
+    for (int j = 0; j < 5; j++)
     {
-        x += 1.5;
-        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x, 0.0f, 0.0f);
-        modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-        //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-        GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-        glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+        for (int i = 0; i < 5; i++)
+        {            
+            GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x, y, 0.0f);
+            modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+            //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+            GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+            glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+            glDrawArrays(GL_TRIANGLES, 0, 6);
+            x += 1.5;
+        }
+        x = 0.0;
+        y += 1.5;
     }
     
     
