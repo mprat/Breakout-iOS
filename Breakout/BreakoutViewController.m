@@ -137,11 +137,11 @@ GLfloat gSquareVertexData[18] =
     _baseModelViewMatrix = GLKMatrix4MakeTranslation(-3.0f, 0.0f, -10.0f);
     
     // Compute the model view matrix for the object rendered with ES2
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
-    //modelViewMatrix = GLKMatrix4Rotate(modelViewMatrix, _rotation, 1.0f, 1.0f, 1.0f);
-    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+//    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
+//    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
     
-    _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+//    _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+    _modelViewProjectionMatrix = _projectionMatrix;
 }
 
 - (void)tearDownGL
@@ -192,8 +192,22 @@ GLfloat gSquareVertexData[18] =
         y += 1.5;
     }
     
+    //ball that will be flying
+    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(3.0, -5.0, 0.0f);
+    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+    //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+    GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+    glDrawArrays(GL_TRIANGLES, 0, 6);    
     
-    
+    // user controlled panel
+    modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(3.0, -5.5, 0.0f), GLKMatrix4MakeScale(1.0f, .5f, 1.0f));
+    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+    //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), _aspect, 0.1f, 100.0f);
+    holdmat = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
