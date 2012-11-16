@@ -14,7 +14,7 @@
 enum
 {
     UNIFORM_MODELVIEWPROJECTION_MATRIX,
-    UNIFORM_NORMAL_MATRIX,
+//    UNIFORM_NORMAL_MATRIX,
     UNIFORM_TEXTURE,
     NUM_UNIFORMS
 };
@@ -24,20 +24,21 @@ GLint uniforms[NUM_UNIFORMS];
 enum
 {
     ATTRIB_VERTEX,
-    ATTRIB_NORMAL,
+    ATTRIB_TEXTURE,
     NUM_ATTRIBUTES
 };
 
-GLfloat gSquareVertexData[18] = 
+GLfloat gSquareVertexData[30] = 
 {
-    //x,y,z,normalX,normalY,normalZ
-    0.5f, 0.5f, 0.0f, //0.0f, //0.0f, 1.0f,
-    0.5f, -0.5f, 0.0f,// 0.0f, //0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, //0.0f, //0.0f, 1.0f,
-    -0.5f, -0.5f, 0.0f,// 0.0f, //0.0f, 1.0f,
-    -0.5f, 0.5f, 0.0f, //0.0f, //0.0f, 1.0f,
-    0.5f, -0.5f, 0.0f, //0.0f, //0.0f, 1.0f
+    //x,y,z,texcoordx, texcoordy
+    0.5f, 0.5f, 0.0f, 1.0f, 1.0f, // 1.0f,
+    0.5f, -0.5f, 0.0f, 1.0f, 0.0f, //1.0f,
+    -0.5f, 0.5f, 0.0f, 0.0f, 1.0f,// 1.0f,
+    -0.5f, -0.5f, 0.0f, 0.0f, 0.0f,// 1.0f,
+    -0.5f, 0.5f, 0.0f, 0.0f, 1.0f, //1.0f,
+    0.5f, -0.5f, 0.0f, 1.0f, 0.0f, //1.0f
 };
+
 
 @interface BreakoutViewController () {
     GLuint _program;
@@ -50,6 +51,8 @@ GLfloat gSquareVertexData[18] =
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
+    GLuint texture[1];
+    GLuint _texCoordSlot;
 }
 @property (strong, nonatomic) EAGLContext *context;
 
@@ -118,6 +121,9 @@ GLfloat gSquareVertexData[18] =
     [self loadShaders];
     
     glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_SRC_COLOR);
     
     glGenVertexArraysOES(1, &_vertexArray);
     glBindVertexArrayOES(_vertexArray);
@@ -126,10 +132,14 @@ GLfloat gSquareVertexData[18] =
     glBindBuffer(GL_ARRAY_BUFFER, _vertexBuffer);
     glBufferData(GL_ARRAY_BUFFER, sizeof(gSquareVertexData), gSquareVertexData, GL_STATIC_DRAW);
     
-    glEnableVertexAttribArray(GLKVertexAttribPosition);
-    glVertexAttribPointer(GLKVertexAttribPosition, 3, GL_FLOAT, GL_FALSE, 0, BUFFER_OFFSET(0));
-    //glEnableVertexAttribArray(GLKVertexAttribNormal);
-    //glVertexAttribPointer(GLKVertexAttribNormal, 3, GL_FLOAT, GL_FALSE, 24, BUFFER_OFFSET(12));
+    glEnableVertexAttribArray(ATTRIB_VERTEX);
+    glVertexAttribPointer(ATTRIB_VERTEX, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), BUFFER_OFFSET(0));
+//    glEnableVertexAttribArray(_texCoordSlot);
+    glEnableVertexAttribArray(ATTRIB_TEXTURE);
+    //glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GL_FLOAT), BUFFER_OFFSET(12));
+    glVertexAttribPointer(ATTRIB_TEXTURE, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), BUFFER_OFFSET(3*sizeof(GLfloat)));
+//    glEnableVertexAttribArray(GLKVertexAttribTexCoord1);
+//    glVertexAttribPointer(GLKVertexAttribTexCoord1, 2, GL_FLOAT, GL_FALSE, 20, BUFFER_OFFSET(16));
     
     glBindVertexArrayOES(0);
     
@@ -145,19 +155,47 @@ GLfloat gSquareVertexData[18] =
     _modelViewProjectionMatrix = _projectionMatrix;
     
     //load textures
-    UIImage* imageClass = [UIImage imageNamed:@"../circle.png"];
-    CGImageRef spriteImage = imageClass.CGImage;
-    size_t storedwidth = CGImageGetWidth(spriteImage);
-    size_t storedheight = CGImageGetHeight(spriteImage);
-    GLubyte *spriteData = (GLubyte *) calloc(storedwidth*storedheight*4, sizeof(GLubyte));
-    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, storedwidth, storedheight, 8, storedwidth*4, CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);  
-    CGContextDrawImage(spriteContext, CGRectMake(0, 0, storedwidth, storedheight), spriteImage);
-    CGContextRelease(spriteContext);    
-    GLuint tid;
-    glGenTextures(1, &(tid));
-    glBindTexture(GL_TEXTURE_2D, tid);
+    glGenTextures(1, &texture[0]);
+    glBindTexture(GL_TEXTURE_2D, texture[0]);
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST); 
-    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, storedwidth, storedheight, 0, GL_RGB, GL_UNSIGNED_BYTE, spriteData);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST); 
+    
+    NSString *path = [[NSBundle mainBundle] pathForResource:@"circle" ofType:@"png"];
+    NSData *texData = [[NSData alloc] initWithContentsOfFile:path];
+    UIImage *image = [[UIImage alloc] initWithData:texData];
+    if (image == nil)
+        NSLog(@"Do real error checking here");
+    
+    GLuint width = CGImageGetWidth(image.CGImage);
+    GLuint height = CGImageGetHeight(image.CGImage);
+    CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+    void *imageData = malloc( height * width * 4 );
+    CGContextRef context = CGBitmapContextCreate( imageData, width, height, 8, 4 * width, colorSpace, kCGImageAlphaPremultipliedLast | kCGBitmapByteOrder32Big );
+    CGColorSpaceRelease( colorSpace );
+    CGContextClearRect( context, CGRectMake( 0, 0, width, height ) );
+    CGContextTranslateCTM( context, 0, height - height );
+    CGContextDrawImage( context, CGRectMake( 0, 0, width, height ), image.CGImage );
+    
+    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, imageData);
+    
+    CGContextRelease(context);
+    
+    free(imageData);
+//    [image release];
+//    [texData release];
+
+    
+    
+//    UIImage* imageClass = [UIImage imageNamed:@"../circle.png"];
+//    CGImageRef spriteImage = imageClass.CGImage;
+//    size_t storedwidth = CGImageGetWidth(spriteImage);
+//    size_t storedheight = CGImageGetHeight(spriteImage);
+//    GLubyte *spriteData = (GLubyte *) calloc(storedwidth*storedheight*4, sizeof(GLubyte));
+//    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, storedwidth, storedheight, 8, storedwidth*4, CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);  
+//    CGContextDrawImage(spriteContext, CGRectMake(0, 0, storedwidth, storedheight), spriteImage);
+//    CGContextRelease(spriteContext);    
+
+//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, storedwidth, storedheight, 0, GL_RGB, GL_UNSIGNED_BYTE, spriteData);
 //    free(spriteData);
 }
 
@@ -216,8 +254,8 @@ GLfloat gSquareVertexData[18] =
     GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
     glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
     //add textures
-//    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, 0); 
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, texture[0]); 
     glUniform1i(uniforms[UNIFORM_TEXTURE], 0);  
     glDrawArrays(GL_TRIANGLES, 0, 6);    
     
@@ -264,7 +302,7 @@ GLfloat gSquareVertexData[18] =
     // Bind attribute locations.
     // This needs to be done prior to linking.
     glBindAttribLocation(_program, ATTRIB_VERTEX, "position");
-    //glBindAttribLocation(_program, ATTRIB_NORMAL, "normal");
+    glBindAttribLocation(_program, ATTRIB_TEXTURE, "texcoord");
     
     // Link program.
     if (![self linkProgram:_program]) {
@@ -288,7 +326,8 @@ GLfloat gSquareVertexData[18] =
     
     // Get uniform locations.
     uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX] = glGetUniformLocation(_program, "modelViewProjectionMatrix");
-    uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
+//    uniforms[UNIFORM_NORMAL_MATRIX] = glGetUniformLocation(_program, "normalMatrix");
+    uniforms[UNIFORM_TEXTURE] = glGetUniformLocation(_program, "texture");
     
     // Release vertex and fragment shaders.
     if (vertShader) {

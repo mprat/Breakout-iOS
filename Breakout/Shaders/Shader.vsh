@@ -7,11 +7,12 @@
 //
 
 attribute vec4 position;
-varying highp vec4 tcoord;
+attribute vec2 texcoord;
+varying highp vec2 tcoord;
 
 uniform mat4 modelViewProjectionMatrix;
 void main()
 {
-    tcoord = position;
+    tcoord = texcoord;
     gl_Position = modelViewProjectionMatrix * position;
 }
