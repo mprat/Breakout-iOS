@@ -7,11 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#include "Square.h"
 
 @interface GameDataSingleton : NSObject{
-    
+    NSMutableArray *squares;
 }
 
-+ (id)sharedInstance;
++ (id)sharedInstance: (int) rows: (int) cols;
 
 @end

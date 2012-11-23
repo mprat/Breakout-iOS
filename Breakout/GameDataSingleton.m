@@ -12,7 +12,7 @@
 
 #pragma mark
 
-+(id)sharedInstance {
++(id)sharedInstance:(int) rows : (int) cols {
     static GameDataSingleton *sharedInstance=nil;
     
     if (sharedInstance == nil){
@@ -25,9 +25,13 @@
     return sharedInstance;
 }
 
--(id)init{
+-(id)init: (int) rows : (int) cols{
     if (self = [super init]){
-        //constructor
+        for (int i = 0; i < rows; i++){
+            for (int j = 0; j < cols; j++){
+                [squares addObject:[[Square alloc]init:i:j]];
+            }
+        }
     }
     
     return self;

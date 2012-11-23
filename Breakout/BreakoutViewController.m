@@ -121,7 +121,7 @@ GLfloat gSquareVertexData[30] =
 {
     [EAGLContext setCurrentContext:self.context];
     
-    sharedGameData = [GameDataSingleton sharedInstance];
+    sharedGameData = [GameDataSingleton sharedInstance:5:5];
     
     [self loadShaders];
     
