@@ -9,16 +9,16 @@
 #import <Foundation/Foundation.h>
 
 @interface Square : NSObject{
-    int xcoord;
-    int ycoord;
+    float xcoord;
+    float ycoord;
     BOOL on;
 }
 
-@property (nonatomic) int xcoord;
-@property (nonatomic) int ycoord;
+@property (nonatomic) float xcoord;
+@property (nonatomic) float ycoord;
 @property (nonatomic) BOOL on;
 
 -(id)init;
--(id)init: (int) x: (int) y;
+-(id)initWithXY: (int) x: (int) y;
 
 @end

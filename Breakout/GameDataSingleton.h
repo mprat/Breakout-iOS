@@ -14,5 +14,6 @@
 }
 
 + (id)sharedInstance: (int) rows: (int) cols;
+- (void) drawSquares;
 
 @end

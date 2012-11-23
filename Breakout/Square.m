@@ -24,7 +24,7 @@
     return self;
 }
 
--(id) init:(int)x :(int)y {
+-(id) initWithXY:(int)x :(int)y {
     self = [super init];
     if (self){
         xcoord = x;

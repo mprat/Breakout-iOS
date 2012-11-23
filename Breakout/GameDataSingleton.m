@@ -26,15 +26,24 @@
 }
 
 -(id)init: (int) rows : (int) cols{
+    NSLog(@"r = %d, c = %d", rows, cols);
     if (self = [super init]){
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
-                [squares addObject:[[Square alloc]init:i:j]];
+                [Square initWithXY:1.5*i:1.5*j];
+                [squares addObject:s];
             }
         }
     }
     
     return self;
+}
+
+-(void) drawSquares{
+    Square *s;
+    for (s in squares){
+        NSLog(@"x = %f, y = %f", [s xcoord], [s ycoord]);
+    }
 }
 
 @end

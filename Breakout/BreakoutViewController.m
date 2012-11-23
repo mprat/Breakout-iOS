@@ -234,44 +234,45 @@ GLfloat gSquareVertexData[30] =
     // Render the object with ES2
     glUseProgram(_program);
     
-    float x = 0.0;
-    float y = -1.0;
-    for (int j = 0; j < 5; j++)
-    {
-        for (int i = 0; i < 5; i++)
-        {            
-            GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x, y, 0.0f);
-            modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-            //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-            GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-            glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
-            glDrawArrays(GL_TRIANGLES, 0, 6);
-            x += 1.5;
-        }
-        x = 0.0;
-        y += 1.5;
-    }
+//    float x = 0.0;
+//    float y = -1.0;
+//    for (int j = 0; j < 5; j++)
+//    {
+//        for (int i = 0; i < 5; i++)
+//        {            
+//            GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(x, y, 0.0f);
+//            modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+//            //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+//            GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+//            glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+//            glDrawArrays(GL_TRIANGLES, 0, 6);
+//            x += 1.5;
+//        }
+//        x = 0.0;
+//        y += 1.5;
+//    }
+    [sharedGameData drawSquares];
     
-    //ball that will be flying
-    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(3.0, -5.0, 0.0f);
-    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-    //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-    GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
-    //add textures
-    glActiveTexture(GL_TEXTURE0);
-    glBindTexture(GL_TEXTURE_2D, texture[0]); 
-    glUniform1i(uniforms[UNIFORM_TEXTURE], 0);  
-    glDrawArrays(GL_TRIANGLES, 0, 6);    
-    
-    // user controlled panel
-    modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(3.0, -5.5, 0.0f), GLKMatrix4MakeScale(1.0f, .5f, 1.0f));
-    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-    //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), _aspect, 0.1f, 100.0f);
-    holdmat = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
-    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
-    glDrawArrays(GL_TRIANGLES, 0, 6);
+//    //ball that will be flying
+//    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(3.0, -5.0, 0.0f);
+//    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+//    //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+//    GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+//    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+//    //add textures
+//    glActiveTexture(GL_TEXTURE0);
+//    glBindTexture(GL_TEXTURE_2D, texture[0]); 
+//    glUniform1i(uniforms[UNIFORM_TEXTURE], 0);  
+//    glDrawArrays(GL_TRIANGLES, 0, 6);    
+//    
+//    // user controlled panel
+//    modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(3.0, -5.5, 0.0f), GLKMatrix4MakeScale(1.0f, .5f, 1.0f));
+//    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+//    //_modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+//    GLKMatrix4 projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), _aspect, 0.1f, 100.0f);
+//    holdmat = GLKMatrix4Multiply(projectionMatrix, modelViewMatrix);
+//    glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+//    glDrawArrays(GL_TRIANGLES, 0, 6);
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
