@@ -7,6 +7,7 @@
 //
 
 #import "BreakoutViewController.h"
+#import "GameDataSingleton.h"
 
 #define BUFFER_OFFSET(i) ((char *)NULL + (i))
 
@@ -48,6 +49,8 @@ GLfloat gSquareVertexData[30] =
     GLKMatrix4 _projectionMatrix;
     GLKMatrix4 _baseModelViewMatrix;
     float _aspect;
+    
+    GameDataSingleton *sharedGameData;
     
     GLuint _vertexArray;
     GLuint _vertexBuffer;
@@ -117,6 +120,8 @@ GLfloat gSquareVertexData[30] =
 - (void)setupGL
 {
     [EAGLContext setCurrentContext:self.context];
+    
+    sharedGameData = [GameDataSingleton sharedInstance];
     
     [self loadShaders];
     
