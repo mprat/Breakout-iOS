@@ -14,6 +14,7 @@
 @synthesize ycoord = _ycoord;
 @synthesize heightRatio = _heightRatio;
 @synthesize on = _on;
+@synthesize textured = _textured;
 
 -(id) init {
     self = [super init];
@@ -22,6 +23,7 @@
         _ycoord = 0;
         _on = true;
         _heightRatio = 1;
+        _textured = NO;
     }
     return self;
 }
@@ -33,7 +35,14 @@
         _ycoord = y;
         _on = true;
         _heightRatio = 1;
+        _textured = NO;
     }
+    return self;
+}
+
+-(id) initWithX:(float)x AndY : (float) y AndTextured:(BOOL)t{
+    self = [self initWithX:x AndY:y];
+    _textured = t;
     return self;
 }
 

@@ -68,7 +68,7 @@ enum
     }
     
     //ball
-    sq = [[Square alloc] initWithX:3.0 AndY:-5.25];
+    sq = [[Square alloc] initWithX:3.0 AndY:-5.25 AndTextured:YES];
     [_squares addObject:sq];
     
     //user-controlled platform
@@ -92,6 +92,13 @@ enum
         modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
         GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+        
+        if (s.textured){
+            glEnableVertexAttribArray(ATTRIB_TEXTURE);
+        } else {
+            glDisableVertexAttribArray(ATTRIB_TEXTURE);
+        }
+        
         glDrawArrays(GL_TRIANGLES, 0, 6);
     }
 }

@@ -134,12 +134,8 @@ GLfloat gSquareVertexData[30] =
     
     glEnableVertexAttribArray(ATTRIB_VERTEX);
     glVertexAttribPointer(ATTRIB_VERTEX, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), BUFFER_OFFSET(0));
-//    glEnableVertexAttribArray(_texCoordSlot);
-    glEnableVertexAttribArray(ATTRIB_TEXTURE);
-    //glVertexAttribPointer(GLKVertexAttribTexCoord0, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GL_FLOAT), BUFFER_OFFSET(12));
+//    glEnableVertexAttribArray(ATTRIB_TEXTURE);
     glVertexAttribPointer(ATTRIB_TEXTURE, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), BUFFER_OFFSET(3*sizeof(GLfloat)));
-//    glEnableVertexAttribArray(GLKVertexAttribTexCoord1);
-//    glVertexAttribPointer(GLKVertexAttribTexCoord1, 2, GL_FLOAT, GL_FALSE, 20, BUFFER_OFFSET(16));
     
     glBindVertexArrayOES(0);
     
