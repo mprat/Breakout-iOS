@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		981A2BC01664323400E88A47 /* Ball.m in Sources */ = {isa = PBXBuildFile; fileRef = 981A2BBF1664323400E88A47 /* Ball.m */; };
 		987D79BF162775C500FD44A3 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987D79BE162775C500FD44A3 /* UIKit.framework */; };
 		987D79C1162775C500FD44A3 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987D79C0162775C500FD44A3 /* Foundation.framework */; };
 		987D79C3162775C500FD44A3 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 987D79C2162775C500FD44A3 /* CoreGraphics.framework */; };
@@ -30,6 +31,8 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		981A2BBE1664323400E88A47 /* Ball.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Ball.h; sourceTree = "<group>"; };
+		981A2BBF1664323400E88A47 /* Ball.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Ball.m; sourceTree = "<group>"; };
 		987D79BA162775C500FD44A3 /* Breakout.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Breakout.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		987D79BE162775C500FD44A3 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		987D79C0162775C500FD44A3 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -127,6 +130,8 @@
 				98C542E21660034200625680 /* GameDataSingleton.m */,
 				98C542E4166007AB00625680 /* Square.h */,
 				98C542E5166007AB00625680 /* Square.m */,
+				981A2BBE1664323400E88A47 /* Ball.h */,
+				981A2BBF1664323400E88A47 /* Ball.m */,
 			);
 			path = Breakout;
 			sourceTree = "<group>";
@@ -237,6 +242,7 @@
 				98FFBF541649C95F00847368 /* VideoShader.vsh in Sources */,
 				98C542E31660034200625680 /* GameDataSingleton.m in Sources */,
 				98C542E6166007AB00625680 /* Square.m in Sources */,
+				981A2BC01664323400E88A47 /* Ball.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -111,4 +111,8 @@ enum
     }
 }
 
+-(void) ballStep{
+    
+}
+
 @end

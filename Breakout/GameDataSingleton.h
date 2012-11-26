@@ -23,5 +23,6 @@
 
 + (id)sharedInstance;
 - (void) drawSquaresWithAspect:(float) aspect;
+- (void) ballStep;
 
 @end
