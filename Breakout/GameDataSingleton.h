@@ -7,13 +7,21 @@
 //
 
 #import <Foundation/Foundation.h>
+#import <GLKit/GLKit.h>
 #include "Square.h"
 
 @interface GameDataSingleton : NSObject{
     NSMutableArray *squares;
+    int rows;
+    int cols;
 }
 
-+ (id)sharedInstance: (int) rows: (int) cols;
-- (void) drawSquares;
+@property (nonatomic, retain) NSMutableArray *squares;
+@property (nonatomic) int rows;
+@property (nonatomic) int cols;
+//@property (nonatomic) GLKMatrix4 *baseModelViewMatrix;
+
++ (id)sharedInstance;
+- (void) drawSquaresWithAspect:(float) aspect;
 
 @end

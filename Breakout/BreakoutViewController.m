@@ -43,11 +43,6 @@ GLfloat gSquareVertexData[30] =
 
 @interface BreakoutViewController () {
     GLuint _program;
-    
-    GLKMatrix4 _modelViewProjectionMatrix;
-    GLKMatrix3 _normalMatrix;
-    GLKMatrix4 _projectionMatrix;
-    GLKMatrix4 _baseModelViewMatrix;
     float _aspect;
     
     GameDataSingleton *sharedGameData;
@@ -121,7 +116,7 @@ GLfloat gSquareVertexData[30] =
 {
     [EAGLContext setCurrentContext:self.context];
     
-    sharedGameData = [GameDataSingleton sharedInstance:5:5];
+    sharedGameData = [GameDataSingleton sharedInstance];
     
     [self loadShaders];
     
@@ -149,15 +144,15 @@ GLfloat gSquareVertexData[30] =
     glBindVertexArrayOES(0);
     
     _aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
-    _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), _aspect, 0.1f, 100.0f);
-    _baseModelViewMatrix = GLKMatrix4MakeTranslation(-3.0f, 0.0f, -10.0f);
+//    _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), _aspect, 0.1f, 100.0f);
+//    _baseModelViewMatrix = GLKMatrix4MakeTranslation(-3.0f, 0.0f, -10.0f);
     
     // Compute the model view matrix for the object rendered with ES2
 //    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
 //    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
     
 //    _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-    _modelViewProjectionMatrix = _projectionMatrix;
+//    _modelViewProjectionMatrix = _projectionMatrix;
     
     //load textures
     glGenTextures(1, &texture[0]);
@@ -251,7 +246,7 @@ GLfloat gSquareVertexData[30] =
 //        x = 0.0;
 //        y += 1.5;
 //    }
-    [sharedGameData drawSquares];
+    [sharedGameData drawSquaresWithAspect:_aspect];
     
 //    //ball that will be flying
 //    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(3.0, -5.0, 0.0f);
