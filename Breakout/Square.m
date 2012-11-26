@@ -10,26 +10,26 @@
 
 @implementation Square
 
-@synthesize xcoord;
-@synthesize ycoord;
-@synthesize on;
+@synthesize xcoord = _xcoord;
+@synthesize ycoord = _ycoord;
+@synthesize on = _on;
 
 -(id) init {
     self = [super init];
     if (self){
-        xcoord = 0;
-        ycoord = 0;
-        on = true;
+        _xcoord = 0;
+        _ycoord = 0;
+        _on = true;
     }
     return self;
 }
 
--(id) initWithXY:(int)x :(int)y {
+-(id) initWithX:(float)x AndY :(float)y {
     self = [super init];
     if (self){
-        xcoord = x;
-        ycoord = y;
-        on = true;
+        _xcoord = x;
+        _ycoord = y;
+        _on = true;
     }
     return self;
 }

@@ -30,8 +30,8 @@
     if (self = [super init]){
         for (int i = 0; i < rows; i++){
             for (int j = 0; j < cols; j++){
-                [Square initWithXY:1.5*i:1.5*j];
-                [squares addObject:s];
+                Square *sq = [sq initWithX:1.5*i AndY:1.5*j];
+                [squares addObject:sq];
             }
         }
     }

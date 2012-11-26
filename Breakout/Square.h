@@ -19,6 +19,6 @@
 @property (nonatomic) BOOL on;
 
 -(id)init;
--(id)initWithXY: (int) x: (int) y;
+-(id)initWithX: (float) x AndY: (float) y;
 
 @end
