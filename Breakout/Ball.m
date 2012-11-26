@@ -10,4 +10,14 @@
 
 @implementation Ball
 
+@synthesize xvel = _xvel;
+@synthesize yvel = _yvel;
+
+-(id)initWithX: (float) x AndY: (float) y AndTextured: (BOOL) t AndXVel: (float) xv AndYVel: (float) yv{
+    self = [super initWithX:x AndY: y AndTextured: t];
+    _xvel = xv;
+    _yvel = yv;
+    return self;
+}
+
 @end
