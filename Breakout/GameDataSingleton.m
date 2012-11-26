@@ -67,6 +67,14 @@ enum
         }
     }
     
+    //ball
+    sq = [[Square alloc] initWithX:3.0 AndY:-5.25];
+    [_squares addObject:sq];
+    
+    //user-controlled platform
+    sq = [[Square alloc] initWithX:3.0 AndY:-6.0 AndHeightRatio:0.5];
+    [_squares addObject:sq];
+    
 //    NSLog(@"length of squares = %d", [_squares count]);
     
     return self;
@@ -76,9 +84,11 @@ enum
     Square *s;
     GLKMatrix4 _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), aspect, 0.1f, 100.0f);
     GLKMatrix4 _baseModelViewMatrix = GLKMatrix4MakeTranslation(-3.0f, 0.0f, -10.0f);
+    
     for (s in _squares){
 //        NSLog(@"x = %f, y = %f", [s xcoord], [s ycoord]);
-        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f);
+        GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f), GLKMatrix4MakeScale(1.0f, s.heightRatio, 1.0f));
+//        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f);
         modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
         GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
         glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);

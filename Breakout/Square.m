@@ -12,6 +12,7 @@
 
 @synthesize xcoord = _xcoord;
 @synthesize ycoord = _ycoord;
+@synthesize heightRatio = _heightRatio;
 @synthesize on = _on;
 
 -(id) init {
@@ -20,6 +21,7 @@
         _xcoord = 0;
         _ycoord = 0;
         _on = true;
+        _heightRatio = 1;
     }
     return self;
 }
@@ -30,7 +32,14 @@
         _xcoord = x;
         _ycoord = y;
         _on = true;
+        _heightRatio = 1;
     }
+    return self;
+}
+
+-(id) initWithX:(float)x AndY:(float)y AndHeightRatio:(float)hR{
+    self = [self initWithX:x AndY:y];
+    _heightRatio = hR;
     return self;
 }
 
