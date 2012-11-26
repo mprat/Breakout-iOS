@@ -8,6 +8,8 @@
 
 #import "GameDataSingleton.h"
 
+#define BUFFER_OFFSET(i) ((char *)NULL + (i))
+
 //@interface GameDataSingleton() 
 //@property (nonatomic) int rows;
 //@property (nonatomic) int cols;
@@ -76,6 +78,12 @@ enum
     [_squares addObject:sq];
     
 //    NSLog(@"length of squares = %d", [_squares count]);
+    
+    
+    glEnable(GL_DEPTH_TEST);
+    glEnable(GL_TEXTURE_2D);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_ONE, GL_SRC_COLOR);
     
     return self;
 }

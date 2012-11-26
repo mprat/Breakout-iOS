@@ -50,7 +50,6 @@ GLfloat gSquareVertexData[30] =
     GLuint _vertexArray;
     GLuint _vertexBuffer;
     GLuint texture[1];
-    GLuint _texCoordSlot;
 }
 @property (strong, nonatomic) EAGLContext *context;
 
@@ -116,14 +115,9 @@ GLfloat gSquareVertexData[30] =
 {
     [EAGLContext setCurrentContext:self.context];
     
-    sharedGameData = [GameDataSingleton sharedInstance];
-    
     [self loadShaders];
     
-    glEnable(GL_DEPTH_TEST);
-    glEnable(GL_TEXTURE_2D);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_SRC_COLOR);
+    sharedGameData = [GameDataSingleton sharedInstance];
     
     glGenVertexArraysOES(1, &_vertexArray);
     glBindVertexArrayOES(_vertexArray);
@@ -134,21 +128,10 @@ GLfloat gSquareVertexData[30] =
     
     glEnableVertexAttribArray(ATTRIB_VERTEX);
     glVertexAttribPointer(ATTRIB_VERTEX, 3, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), BUFFER_OFFSET(0));
-//    glEnableVertexAttribArray(ATTRIB_TEXTURE);
     glVertexAttribPointer(ATTRIB_TEXTURE, 2, GL_FLOAT, GL_FALSE, 5 * sizeof(GLfloat), BUFFER_OFFSET(3*sizeof(GLfloat)));
-    
     glBindVertexArrayOES(0);
     
     _aspect = fabsf(self.view.bounds.size.width / self.view.bounds.size.height);
-//    _projectionMatrix = GLKMatrix4MakePerspective(GLKMathDegreesToRadians(65.0f), _aspect, 0.1f, 100.0f);
-//    _baseModelViewMatrix = GLKMatrix4MakeTranslation(-3.0f, 0.0f, -10.0f);
-    
-    // Compute the model view matrix for the object rendered with ES2
-//    GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(0.0f, 0.0f, 0.0f);
-//    modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-    
-//    _modelViewProjectionMatrix = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-//    _modelViewProjectionMatrix = _projectionMatrix;
     
     //load textures
     glGenTextures(1, &texture[0]);
@@ -177,22 +160,6 @@ GLfloat gSquareVertexData[30] =
     CGContextRelease(context);
     
     free(imageData);
-//    [image release];
-//    [texData release];
-
-    
-    
-//    UIImage* imageClass = [UIImage imageNamed:@"../circle.png"];
-//    CGImageRef spriteImage = imageClass.CGImage;
-//    size_t storedwidth = CGImageGetWidth(spriteImage);
-//    size_t storedheight = CGImageGetHeight(spriteImage);
-//    GLubyte *spriteData = (GLubyte *) calloc(storedwidth*storedheight*4, sizeof(GLubyte));
-//    CGContextRef spriteContext = CGBitmapContextCreate(spriteData, storedwidth, storedheight, 8, storedwidth*4, CGImageGetColorSpace(spriteImage), kCGImageAlphaPremultipliedLast);  
-//    CGContextDrawImage(spriteContext, CGRectMake(0, 0, storedwidth, storedheight), spriteImage);
-//    CGContextRelease(spriteContext);    
-
-//    glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, storedwidth, storedheight, 0, GL_RGB, GL_UNSIGNED_BYTE, spriteData);
-//    free(spriteData);
 }
 
 - (void)tearDownGL
@@ -210,11 +177,6 @@ GLfloat gSquareVertexData[30] =
 
 #pragma mark - GLKView and GLKViewController delegate methods
 
-- (void)update
-{
-    //if there's anything you want to update with each timestep
-}
-
 - (void)glkView:(GLKView *)view drawInRect:(CGRect)rect
 {
     glClearColor(0.65f, 0.65f, 0.65f, 0.0f);
@@ -226,12 +188,6 @@ GLfloat gSquareVertexData[30] =
     glUseProgram(_program);
     
     [sharedGameData drawSquaresWithAspect:_aspect];
-    
-//    //add textures
-//    glActiveTexture(GL_TEXTURE0);
-//    glBindTexture(GL_TEXTURE_2D, texture[0]); 
-//    glUniform1i(uniforms[UNIFORM_TEXTURE], 0);  
-//    glDrawArrays(GL_TRIANGLES, 0, 6);    
 }
 
 #pragma mark -  OpenGL ES 2 shader compilation
