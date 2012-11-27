@@ -26,5 +26,6 @@
 -(id)initWithX: (float) x AndY: (float) y;
 -(id)initWithX: (float) x AndY: (float) y AndTextured: (BOOL) t;
 -(id)initWithX:(float)x AndY:(float)y AndHeightRatio: (float)hR;
++(BOOL)collisionBetween:(Square *) s1 And: (Square *) s2;
 
 @end

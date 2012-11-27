@@ -25,5 +25,6 @@
 + (id)sharedInstance;
 - (void) drawSquaresWithAspect:(float) aspect;
 - (void) wallCollision:(Ball *) b;
+- (void) squareCollision:(Ball *)b;
 
 @end

@@ -52,4 +52,13 @@
     return self;
 }
 
++(BOOL) collisionBetween:(Square *)s1 And:(Square *)s2{
+//    NSLog(@"dist sq = %f", pow(s1.xcoord - s2.xcoord, 2) + pow(s1.ycoord - s2.ycoord, 2));
+    if (abs(pow(s1.xcoord - s2.xcoord, 2) + pow(s1.ycoord - s2.ycoord, 2) - 0.8) < 0.05){
+//        NSLog(@"yes");
+        return YES;
+    }
+    return NO;
+}
+
 @end

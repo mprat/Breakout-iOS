@@ -75,8 +75,8 @@ enum
     [_squares addObject:sq];
     
     //user-controlled platform
-    sq = [[Square alloc] initWithX:3.0 AndY:-6.0 AndHeightRatio:0.5];
-    [_squares addObject:sq];
+//    sq = [[Square alloc] initWithX:3.0 AndY:-6.0 AndHeightRatio:0.5];
+//    [_squares addObject:sq];
     
 //    NSLog(@"length of squares = %d", [_squares count]);
     
@@ -98,22 +98,36 @@ enum
         if ([s isKindOfClass:[Ball class]]){
             [(Ball *)s step];
             [self wallCollision:(Ball *)s];
-            
+            [self squareCollision:(Ball *)s];
         }
 //        NSLog(@"x = %f, y = %f", [s xcoord], [s ycoord]);
-        GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f), GLKMatrix4MakeScale(1.0f, s.heightRatio, 1.0f));
-//        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f);
-        modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
-        GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
-        glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
+        if (s.on){
+            GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f), GLKMatrix4MakeScale(1.0f, s.heightRatio, 1.0f));
+//          GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f);
+            modelViewMatrix = GLKMatrix4Multiply(_baseModelViewMatrix, modelViewMatrix);
+            GLKMatrix4 holdmat = GLKMatrix4Multiply(_projectionMatrix, modelViewMatrix);
+            glUniformMatrix4fv(uniforms[UNIFORM_MODELVIEWPROJECTION_MATRIX], 1, 0, holdmat.m);
         
-        if (s.textured){
-            glEnableVertexAttribArray(ATTRIB_TEXTURE);
-        } else {
-            glDisableVertexAttribArray(ATTRIB_TEXTURE);
+//          if (s.textured){
+                glEnableVertexAttribArray(ATTRIB_TEXTURE);
+//          } else {
+//              glDisableVertexAttribArray(ATTRIB_TEXTURE);
+//          }
+        
+            glDrawArrays(GL_TRIANGLES, 0, 6);
         }
-        
-        glDrawArrays(GL_TRIANGLES, 0, 6);
+    }
+}
+
+-(void) squareCollision:(Ball *)b{
+    Square *s;
+    for (s in _squares){
+        if (![s isKindOfClass:[Ball class]] && s.on){
+            if ([Square collisionBetween:b And:s]){
+                s.on = NO;
+//                b.xvel = -b.xvel;
+            }
+        }
     }
 }
 
@@ -129,6 +143,7 @@ enum
     //bottom resets
     if (fabsf(b.ycoord + 6) < 0.1){
         [b reset];
+//        b.yvel = -b.yvel;
     }
 }
 
