@@ -70,7 +70,8 @@ enum
     }
     
     //ball
-    sq = [[Square alloc] initWithX:3.0 AndY:-5.25 AndTextured:YES];
+//    sq = [[Square alloc] initWithX:3.0 AndY:-5.25 AndTextured:YES];
+    sq = [[Ball alloc] initWithX:3.0 AndY:-5.25 AndTextured:YES AndXVel:0.1 AndYVel:0.1];
     [_squares addObject:sq];
     
     //user-controlled platform
@@ -94,6 +95,11 @@ enum
     GLKMatrix4 _baseModelViewMatrix = GLKMatrix4MakeTranslation(-3.0f, 0.0f, -10.0f);
     
     for (s in _squares){
+        if ([s isKindOfClass:[Ball class]]){
+            [(Ball *)s step];
+            [self wallCollision:(Ball *)s];
+            
+        }
 //        NSLog(@"x = %f, y = %f", [s xcoord], [s ycoord]);
         GLKMatrix4 modelViewMatrix = GLKMatrix4Multiply(GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f), GLKMatrix4MakeScale(1.0f, s.heightRatio, 1.0f));
 //        GLKMatrix4 modelViewMatrix = GLKMatrix4MakeTranslation(s.xcoord, s.ycoord, 0.0f);
@@ -111,8 +117,20 @@ enum
     }
 }
 
--(void) ballStep{
-    
+-(void) wallCollision:(Ball *)b{
+    NSLog(@"xc = %f", b.xcoord);
+    // right or left wall
+    if ((fabsf(b.xcoord - 7.1) < 0.1) || (fabsf(b.xcoord + 1.6) < 0.1)) {
+        b.xvel = -b.xvel;
+    }
+    //top
+    if (fabsf(b.ycoord - 6) < 0.1) {
+        b.yvel = -b.yvel;
+    }
+    //bottom resets
+    if (fabsf(b.ycoord + 6) < 0.1){
+        [b reset];
+    }
 }
 
 @end

@@ -9,6 +9,7 @@
 #import <Foundation/Foundation.h>
 #import <GLKit/GLKit.h>
 #include "Square.h"
+#include "Ball.h"
 
 @interface GameDataSingleton : NSObject{
     NSMutableArray *squares;
@@ -23,6 +24,6 @@
 
 + (id)sharedInstance;
 - (void) drawSquaresWithAspect:(float) aspect;
-- (void) ballStep;
+- (void) wallCollision:(Ball *) b;
 
 @end
