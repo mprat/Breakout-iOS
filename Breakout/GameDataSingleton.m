@@ -118,7 +118,6 @@ enum
 }
 
 -(void) wallCollision:(Ball *)b{
-    NSLog(@"xc = %f", b.xcoord);
     // right or left wall
     if ((fabsf(b.xcoord - 7.1) < 0.1) || (fabsf(b.xcoord + 1.6) < 0.1)) {
         b.xvel = -b.xvel;
