@@ -11,6 +11,8 @@ uniform sampler2D tex;
 
 void main()
 {
+    //lowp vec4 holdcolor = texture2D(tex, tcoord);
+    //gl_FragColor = vec4(holdcolor.www, 1.0);
     gl_FragColor = texture2D(tex, tcoord);
 //    gl_FragColor = vec4(tcoord.xy, 0.0, 1.0);
 //    gl_FragColor = vec4(1.0, 0.0, 0.0, 1.0);

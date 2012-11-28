@@ -28,5 +28,7 @@
 -(void)step;
 -(void)reset;
 -(void)bounce: (Square *) s;
+-(void)reflectX;
+-(void)reflectY;
 
 @end

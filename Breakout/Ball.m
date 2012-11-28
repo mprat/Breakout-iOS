@@ -42,10 +42,18 @@
 
 -(void)bounce: (Square *) s{
     if ((self.ycoord < s.ycoord - self.radius*.4) || (self.ycoord > s.ycoord + self.radius*0.4)){
-        self.yvel = -self.yvel;
+        [self reflectY];
     } else if ((self.xcoord < s.xcoord - self.radius*.4) || (self.xcoord > s.xcoord + self.radius*0.4)){
-        self.xvel = -self.xvel;
+        [self reflectX];
     }
+}
+
+-(void)reflectX{
+    self.yvel = -self.yvel;
+}
+
+-(void)reflectY{
+    self.xvel = -self.xvel;
 }
 
 @end

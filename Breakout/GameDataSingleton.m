@@ -84,7 +84,8 @@ enum
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_2D);
     glEnable(GL_BLEND);
-    glBlendFunc(GL_ONE, GL_SRC_COLOR);
+    //glBlendFunc(GL_ONE, GL_SRC_COLOR);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
     
     return self;
 }
@@ -134,11 +135,11 @@ enum
 -(void) wallCollision:(Ball *)b{
     // right or left wall
     if ((fabsf(b.xcoord - 6.5 - b.radius) < 0.1) || (fabsf(b.xcoord + 1.5 + b.radius) < 0.1)) {
-        b.xvel = -b.xvel;
+        [b reflectY];
     }
     //top
     if (fabsf(b.ycoord - 5.5 - b.radius) < 0.1) {
-        b.yvel = -b.yvel;
+        [b reflectX];
     }
     //bottom resets
     if (fabsf(b.ycoord + 5.5 + b.radius) < 0.1){
