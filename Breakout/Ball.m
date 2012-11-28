@@ -41,8 +41,10 @@
 }
 
 -(void)bounce: (Square *) s{
-    if (self.ycoord < s.ycoord){
-        NSLog(@"below");
+    if ((self.ycoord < s.ycoord - self.radius*.4) || (self.ycoord > s.ycoord + self.radius*0.4)){
+        self.yvel = -self.yvel;
+    } else if ((self.xcoord < s.xcoord - self.radius*.4) || (self.xcoord > s.xcoord + self.radius*0.4)){
+        self.xvel = -self.xvel;
     }
 }
 

@@ -14,6 +14,7 @@
     BOOL on;
     float heightRatio;
     BOOL textured;
+    float radius;
 }
 
 @property (nonatomic) float xcoord;
@@ -21,6 +22,7 @@
 @property (nonatomic) float heightRatio;
 @property (nonatomic) BOOL on;
 @property (nonatomic) BOOL textured;
+@property (nonatomic) float radius;
 
 -(id)init;
 -(id)initWithX: (float) x AndY: (float) y;

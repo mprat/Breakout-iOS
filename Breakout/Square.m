@@ -15,6 +15,7 @@
 @synthesize heightRatio = _heightRatio;
 @synthesize on = _on;
 @synthesize textured = _textured;
+@synthesize radius = _radius;
 
 -(id) init {
     self = [super init];
@@ -24,6 +25,7 @@
         _on = true;
         _heightRatio = 1;
         _textured = NO;
+        _radius = 0.5;
     }
     return self;
 }
@@ -36,6 +38,7 @@
         _on = true;
         _heightRatio = 1;
         _textured = NO;
+        _radius = 0.5;
     }
     return self;
 }
@@ -54,8 +57,7 @@
 
 +(BOOL) collisionBetween:(Square *)s1 And:(Square *)s2{
 //    NSLog(@"dist sq = %f", pow(s1.xcoord - s2.xcoord, 2) + pow(s1.ycoord - s2.ycoord, 2));
-    if (abs(pow(s1.xcoord - s2.xcoord, 2) + pow(s1.ycoord - s2.ycoord, 2) - 0.8) < 0.05){
-//        NSLog(@"yes");
+    if (abs(pow(s1.xcoord - s2.xcoord, 2) + pow(s1.ycoord - s2.ycoord, 2) - s1.radius*s1.radius) < 0.05){
         return YES;
     }
     return NO;

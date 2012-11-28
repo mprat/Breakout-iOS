@@ -133,15 +133,15 @@ enum
 
 -(void) wallCollision:(Ball *)b{
     // right or left wall
-    if ((fabsf(b.xcoord - 7.1) < 0.1) || (fabsf(b.xcoord + 1.6) < 0.1)) {
+    if ((fabsf(b.xcoord - 6.5 - b.radius) < 0.1) || (fabsf(b.xcoord + 1.5 + b.radius) < 0.1)) {
         b.xvel = -b.xvel;
     }
     //top
-    if (fabsf(b.ycoord - 6) < 0.1) {
+    if (fabsf(b.ycoord - 5.5 - b.radius) < 0.1) {
         b.yvel = -b.yvel;
     }
     //bottom resets
-    if (fabsf(b.ycoord + 6) < 0.1){
+    if (fabsf(b.ycoord + 5.5 + b.radius) < 0.1){
         [b reset];
 //        b.yvel = -b.yvel;
     }
