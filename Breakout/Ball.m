@@ -40,4 +40,10 @@
     _yvel = _yvelinit;
 }
 
+-(void)bounce: (Square *) s{
+    if (self.ycoord < s.ycoord){
+        NSLog(@"below");
+    }
+}
+
 @end

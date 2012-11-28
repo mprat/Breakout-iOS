@@ -125,7 +125,7 @@ enum
         if (![s isKindOfClass:[Ball class]] && s.on){
             if ([Square collisionBetween:b And:s]){
                 s.on = NO;
-//                b.xvel = -b.xvel;
+                [b bounce:s];
             }
         }
     }

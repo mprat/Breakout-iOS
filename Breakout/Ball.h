@@ -27,5 +27,6 @@
 -(id)initWithX: (float) x AndY: (float) y AndTextured: (BOOL) t AndXVel: (float) xv AndYVel: (float) yv;
 -(void)step;
 -(void)reset;
+-(void)bounce: (Square *) s;
 
 @end
