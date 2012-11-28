@@ -29,13 +29,13 @@
 }
 
 -(void)step{
-    super.xcoord += _xvel;
-    super.ycoord += _yvel;
+    self.xcoord += _xvel;
+    self.ycoord += _yvel;
 }
 
 -(void)reset{
-    super.xcoord = _xcoordinit;
-    super.ycoord = _ycoordinit;
+    self.xcoord = _xcoordinit;
+    self.ycoord = _ycoordinit;
     _xvel = _xvelinit;
     _yvel = _yvelinit;
 }
